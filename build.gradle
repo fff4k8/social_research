@@ -1,5 +1,8 @@
 plugins {
     id 'java'
+    id 'war'
+    id 'org.springframework.boot' version '2.7.8'
+    id 'io.spring.dependency-management' version '1.1.0'
 }
 
 group 'org.f4k8'
@@ -8,8 +11,31 @@ version '1.0-SNAPSHOT'
 repositories {
     mavenCentral()
 }
+configurations {
+    compile.exclude module: 'spring-boot-starter-tomcat'
+    compile.exclude group: 'org.apache.tomcat.embed'
+}
+
+
 
 dependencies {
+
+    implementation 'com.github.gavlyukovskiy:datasource-proxy-spring-boot-starter:1.8.1'
+    developmentOnly("org.springframework.boot:spring-boot-devtools")
+
+    
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-undertow'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.postgresql:postgresql'
+    implementation  'org.springframework.boot:spring-boot-starter-thymeleaf'
+
+
+    implementation("org.springframework.boot:spring-boot-starter-security")
+    implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
 }
