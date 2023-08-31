@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <link rel="stylesheet" th:href="@{/person_styles.css}" />
+  <meta name="viewport" content="width=device-width">
+    <meta charset="UTF-8">
+    <title>List of Quizzes</title>
+
+</head>
+<body>
+
+<th:block th:each="quiz: ${quizList}" >
+<div id="person_form" style=" display: inline-block; float: both; margin: 21px;">
+     <span th:text="${quiz.description}" style="font-size: 18px;"> </span> <br><br>
+    <a sec:authorize="hasRole('ROLE_USER')"th:href="@{'/quiz_form?id=' + ${quiz.id}}" class="button"  id="sub_person"  style=" margin: auto; font-size: 14px; width: 120px height: 52px; ">Take a quiz</a>
+    <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{'/admin/quiz_result?id=' + ${quiz.id}}" class="button"  id="sub_person"   style="margin: auto; font-size: 14px; width: 120px height: 52px; ">Quiz result</a>
+</div>
+</th:block>
+
+</body>
+</html>

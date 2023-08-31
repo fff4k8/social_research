@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+
+    <link rel="stylesheet" th:href="@{/person_styles.css}" />
+    <meta charset="UTF-8">
+    <title>Create a quizzz</title>
+     <script type="text/javascript" src="/creating_quiz.js"></script>
+
+</head>
+<body >
+
+<form style="margin-top:50px" id="person_form" action="/admin/quiz_submit" method="post" >
+    Title for quiz:
+    <input type="text" id="quiz_title" name="quiz_title" value="" required > <br> <br>
+
+    Number of questions:
+  <input type="text" id="num_questions" name="num_questions" value="" required oninput="addQuestions()">
+    <br> <br>
+  <div id="questions_container"></div>
+
+    <input type="submit"  value="Submit" id="sub_person">
+</form>
+
+
+</div>
+</body>
+</html>

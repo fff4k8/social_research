@@ -1,0 +1,49 @@
+
+html{
+height: 100%;
+background: radial-gradient(ellipse at top, #b0efff, transparent),
+            radial-gradient(ellipse at bottom, #c4ddff, transparent);
+}
+
+#person_form{
+	display: table;
+	margin: auto;
+	border-radius: 30px;
+	background-color: #ffdfe4;
+	background: linear-gradient(70deg, #ffdfe4,#c9efff,#ffdfe4, #ffc7d0);
+        border:  0.12rem solid #e3e3e3;
+	padding: 32px 42px;
+        text-align: left ;
+	text-decoration: none;
+	color: grey;
+	font-size: 16px;
+	box-shadow: 5px 3px 10px;
+}
+
+#email,#password,#education,#age,#gender,#area,#firstName,#lastName,#sub_person, #population{
+       background-color: #45CEEF;
+       border: none;
+       color: white;
+       padding: 18px 32px;
+       text-align: center;
+       text-decoration: none;
+       display: inline-block;
+       font-size: 16px;
+       margin: 12px 2px;
+       cursor: pointer;
+       width:100%;
+       box-sizing:border-box;
+}
+
+
+#email:hover,#password:hover,#education:hover,#age:hover,#gender:hover,#area:hover,#firstName:hover,#lastName:hover,#sub_person:hover,#population:hover{
+             background-color: #2693bb;
+			 transition-duration: 1s;
+            }
+
+#email:focus,#password:focus,#firstName:focus,#lastName:focus,#area:focus,#gender:focus,#age:focus,#education:focus,#sub_person:focus,#population:focus{
+	background-color: #32a8d3;
+}
+
+
+

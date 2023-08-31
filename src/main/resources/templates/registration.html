@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" th:href="@{/person_styles.css}" />
+     <meta name="viewport" content="width=device-width">
+   <meta charset="UTF-8">
+    <title>Registration</title>
+</head>
+
+<body>
+<form action="#"  th:action="@{/registration}" th:object="${person}" method="POST" id="person_form">
+   
+   <label for="firstName"  >First Name:&nbsp&nbsp&nbsp</label>
+    <input  type="text"  th:field="*{personDetails.firstName}" id="firstName" name="firstName"   minlength="3" maxlength="64" required="true"  placeholder="First name" ><br><br>
+
+    <label for="lastName" >Last Name:&nbsp&nbsp&nbsp</label>
+    <input type="text" th:field="*{personDetails.lastName}" id="lastName" name="lastName" minlength="3" maxlength="64" required="true" placeholder="Last name"><br><br>
+
+    <label for="email" >Email:&nbsp&nbsp&nbsp</label>
+    <input type="text" th:field="*{email}" id="email" name="email" minlength="7" maxlength="32" required="true" placeholder="Email"><br><br>
+
+    <label for="password" >Password:&nbsp&nbsp&nbsp</label>
+    <input type="password" th:field="*{personDetails.password}" id="password" name="password" minlength="7" maxlength="64" required="true" placeholder="Password"><br><br>
+
+     <label for="area" >City/town/area:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</label>
+
+    <input type="text" list="cityList" th:field="*{area}" id="area" name="area" minlength="3" maxlength="64" required="true" placeholder="City/Town/Area" >
+    <br><br>
+
+
+    <label for="population" >Area population:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</label>
+
+    <input type="number" th:field="*{areaPopulation}" id="population" name="population" min="100"  required="true" placeholder="Area population" >
+    <br><br>
+    
+
+	<label for="age" >Age:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp </label>
+    <input type="number" th:field="*{age}" id="age" name="age" min="18" max="99" required="true" placeholder="Age">
+
+	<br><br>
+
+	<label for="gender" >Gender: &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</label>
+   <div id="gender">	
+   <input type="radio" th:field="*{gender}" id="male" name="gender" value="M" required="true">
+	<label for="male">Male</label>
+    <input type="radio" th:field="*{gender}" id="female" name="gender" value="F">
+    <label for="female">Female</label>
+   </div>
+	<br> <br>
+
+  <label for="education" >Education:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</label>
+
+ <select th:field="*{education}" id="education" name="education" required>
+	<option value="">Make a selection</option>
+    <option value="NONE">None</option>
+    <option value="MID">Middle</option>
+    <option value="HIGH">High</option>
+            </select>
+    <br><br>
+    <div th:if="${errorMessage}" th:text="${errorMessage}" style="color:red;" ></div>
+    <br><br>
+    <input type="submit" id="sub_person" value="Submit" >
+</form>
+
+	<datalist id="cityList">
+            <option value="Samara"/>
+            <option value="Moscow"/>
+            <option value="St.Petersburg"/>
+			<option value="Kazan"/>
+        </datalist>
+
+</body>
+</html>

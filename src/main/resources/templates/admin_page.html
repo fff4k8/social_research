@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+ <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+  <link rel="stylesheet" th:href="@{/person_styles.css}" />
+  <meta name="viewport" content="width=device-width">
+  <meta charset="UTF-8">
+    <title>Admin Page</title>
+</head>
+<body >
+<div id="person_form" style="display: inline-block; float: both; margin: 21px;">
+
+
+  <a th:href="@{'/admin/create_quiz'}" class="button"  id="sub_person"  style="  font-size: 24px;  ">Create a Quiz</a>
+</div>
+
+<div id="person_form" style="display: inline-block; float: both; margin: 21px;">
+
+  <a th:href="@{'/admin/quizzes'}" class="button"  id="sub_person"  style=" font-size: 24px;  ">Quiz results</a>
+</div>
+
+</body>
+</html>
