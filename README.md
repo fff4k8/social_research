@@ -1,4 +1,4 @@
-# social_research
+# Social Research Service
 social research project
 
 ![routing](https://github.com/fff4k8/social_research/assets/25677966/7da46a40-d5d6-45ad-b126-286c542275bf)
