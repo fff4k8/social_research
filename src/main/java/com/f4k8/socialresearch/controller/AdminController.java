@@ -26,7 +26,7 @@ public class AdminController {
   }
 
   @GetMapping("/quizzes")
-  public String quizzes(HttpSession session, Model model) {
+  public String get_quizzes(HttpSession session, Model model) {
 
     //TODO: candidate for caching
     @SuppressWarnings("unchecked")
@@ -41,7 +41,7 @@ public class AdminController {
 
   // 1. create new quiz
   @GetMapping("/create_quiz")
-  public String quiz() {
+  public String create_quiz() {
     return "create_quiz";
   }
 
@@ -49,7 +49,7 @@ public class AdminController {
   @PostMapping(path = "/quiz_submit",
       consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE,
       produces = MediaType.TEXT_HTML_VALUE)
-  public String quiz_submit(@RequestBody MultiValueMap<String, String> map) {
+  public String submit_quiz(@RequestBody MultiValueMap<String, String> map) {
    Quiz quiz = quizService.saveQuiz(map); // 3. processing values
     return "redirect:/";
   }

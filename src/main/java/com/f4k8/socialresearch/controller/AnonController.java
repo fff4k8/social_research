@@ -19,7 +19,7 @@ public class AnonController {
   SecurityService securityService;
 
   @GetMapping("/registration")
-  public String form(Person person) {
+  public String reg_form(Person person) {
     return "registration";
   }
 
