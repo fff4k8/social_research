@@ -23,6 +23,7 @@ dependencies {
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     implementation 'com.github.gavlyukovskiy:datasource-proxy-spring-boot-starter:1.8.1'
 
+    implementation 'org.springframework.boot:spring-boot-starter-cache'
 
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-undertow'
