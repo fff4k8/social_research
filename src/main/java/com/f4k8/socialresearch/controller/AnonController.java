@@ -27,13 +27,14 @@ public class AnonController {
   @PostMapping("/registration")
   public String savePerson(Person person, Model model) {
 
+
     boolean isRegistered = securityService.registerPerson(person);
 
     if (isRegistered){
       return "redirect:/login";
     }
     else
-      model.addAttribute("errorMessage","Email already exist");
+      model.addAttribute("errorMessage","Email already exists");
       return "registration";
   }
 

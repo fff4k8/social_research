@@ -1,7 +1,5 @@
 package com.f4k8.socialresearch.controller;
 
-
-
 import com.f4k8.socialresearch.model.*;
 import com.f4k8.socialresearch.service.PersonService;
 import com.f4k8.socialresearch.service.QuizService;
@@ -12,10 +10,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.MultiValueMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
@@ -31,6 +26,7 @@ public class UserController {
   @Autowired
   PersonService personService;
 
+
   @GetMapping("/") // redirect depends on user role
   public String homePage(@AuthenticationPrincipal SecurityUser securityUser) {
     if (securityUser.getRole().equals(PersonDetails.Role.ADMIN)) {
@@ -41,34 +37,29 @@ public class UserController {
 
 
   @GetMapping("/quizzes")
-  public String get_quizzes(@AuthenticationPrincipal SecurityUser securityUser, HttpSession session, Model model) {
+  public String get_quizzes(@AuthenticationPrincipal SecurityUser securityUser, Model model) {
 
-    //TODO: candidate for caching
-    @SuppressWarnings("unchecked")
-    List<Quiz> quizList = (List<Quiz>) session.getAttribute("quizList");
+    List<Quiz> quizList = new ArrayList<>(quizService.findAllQuizzes());
 
-
-   if (quizList == null) {
-      quizList = quizService.findAllQuizzes(); // loads only quizzes id, description
-      session.setAttribute("quizList", quizList);
-    }
-
+    // clear answered quizzes
     quizList.removeAll(securityUser.getPerson().getQuizzes());
     model.addAttribute(quizList);
 
     return "quizzes";
   }
 
+
+
   @GetMapping("/quiz_form") // get quiz by id
   public String get_quiz(@RequestParam Integer id, Model model, HttpSession session)  {
-    //TODO: candidate for caching
-    Quiz quiz = quizService.findByIdEager(id);
 
-  model.addAttribute(quiz);
-   session.setAttribute("quiz", quiz);
+    Quiz quiz = quizService.findById(id);
 
+    model.addAttribute(quiz);
+    session.setAttribute("quiz_id", id);
     return "quiz_form";
   }
+
 
 
   @PostMapping(path = "/submit_answers",
@@ -80,7 +71,8 @@ public class UserController {
     Map<String, String> map = mmap.toSingleValueMap();
 
     // websession cache
-    Quiz quiz = (Quiz) session.getAttribute("quiz");
+    int id = (int) session.getAttribute("quiz_id");
+    Quiz quiz = quizService.findById(id);
     // websession cache
     Person person = securityUser.getPerson();
 
@@ -96,7 +88,7 @@ public class UserController {
       answers.add(answer);
     });
     personService.insertQuizAnswers(person, answers, quiz, 30);
-    session.removeAttribute("quiz");
+    session.removeAttribute("quiz_id");
     return "redirect:/quizzes";
   }
 
