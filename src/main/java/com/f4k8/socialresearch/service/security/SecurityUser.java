@@ -29,6 +29,9 @@ public class SecurityUser implements UserDetails {
   public Collection<? extends GrantedAuthority> getAuthorities() {
     return Collections.singleton(new SimpleGrantedAuthority("ROLE_" + person.getPersonDetails().getRole().name()));
   }
+  public PersonDetails.Role getRole() {
+    return person.getPersonDetails().getRole();
+  }
 
   @Override
   public String getPassword() {
@@ -60,7 +63,4 @@ public class SecurityUser implements UserDetails {
     return true;
   }
 
-  public PersonDetails.Role getRole() {
-    return person.getPersonDetails().getRole();
-  }
 }

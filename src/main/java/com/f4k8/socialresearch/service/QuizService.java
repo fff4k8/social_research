@@ -13,26 +13,24 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceUnit;
 import javax.validation.constraints.NotNull;
-import java.util.List;
-
+import java.util.Collection;
 
 @Service
 public class QuizService {
 
   @PersistenceUnit
   EntityManagerFactory emf;
-
   @Autowired
   QuizRepository quizRepository;
+  @Autowired
+  CacheService cacheService;
 
-  @Transactional(readOnly = true)
-  public List<Quiz> findAllQuizzes() {
-    return quizRepository.findAll();
+  public Collection<Quiz> findAllQuizzes() {
+    return cacheService.findAllQuizzes();
   }
 
-  @Transactional(readOnly = true)
-  public Quiz findByIdEager(int id){
-    return quizRepository.findByIdEager(id);
+  public Quiz findById(int id){
+    return cacheService.findQuizById(id);
   }
 
   @Transactional(readOnly = true)
@@ -40,8 +38,8 @@ public class QuizService {
     return quizRepository.findByIdEagerPersons(id);
   }
 
-  // Parsing <Q,A> pairs from web-controller
-  public Quiz saveQuiz(@NotNull MultiValueMap<String, String> map) {
+    // Parsing <Q,A> pairs from web-controller
+    public void saveQuiz(@NotNull MultiValueMap<String, String> map) {
     EntityManager em = emf.createEntityManager();
 
     Quiz quiz = new Quiz(); // create
@@ -80,7 +78,8 @@ public class QuizService {
     em.getTransaction().commit();
     em.clear();
     em.close();
-    return quiz;
+
+    cacheService.saveQuiz(quiz); // updating cache
   }
 
 }

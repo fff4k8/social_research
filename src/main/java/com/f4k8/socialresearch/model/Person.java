@@ -22,7 +22,7 @@ public class Person implements Serializable {
   @NotNull @Size(min=3, max=32)
   private String area;
 
-  @NotNull @Size(min=3, max=32)
+  @NotNull @Size(min=3, max=32) @Min(100) @Max(Integer.MAX_VALUE)
   private Integer areaPopulation;
 
   @NotNull @Min(18) @Max(99)

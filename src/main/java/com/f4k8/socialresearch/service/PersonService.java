@@ -79,7 +79,8 @@ public class PersonService {
 
     em.clear();
     em.close();
-    // updating Person at the end
+
+    // updating Person (websession) at the end
     person.addQuiz(quiz);
   }
 

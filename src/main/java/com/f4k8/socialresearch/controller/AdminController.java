@@ -9,9 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
+import java.util.Collection;
 
-import javax.servlet.http.HttpSession;
-import java.util.List;
 
 @Controller
 @RequestMapping("/admin")
@@ -26,15 +25,10 @@ public class AdminController {
   }
 
   @GetMapping("/quizzes")
-  public String get_quizzes(HttpSession session, Model model) {
+  public String get_quizzes(Model model) {
 
-    //TODO: candidate for caching
-    @SuppressWarnings("unchecked")
-    List<Quiz> quizList = (List<Quiz>) session.getAttribute("quizList");
-    if (quizList == null) {
-      quizList = quizService.findAllQuizzes();
-      session.setAttribute("quizList", quizList);
-    }
+    Collection<Quiz> quizList = quizService.findAllQuizzes();
+
     model.addAttribute(quizList);
     return "quizzes";
   }
@@ -50,13 +44,14 @@ public class AdminController {
       consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE,
       produces = MediaType.TEXT_HTML_VALUE)
   public String submit_quiz(@RequestBody MultiValueMap<String, String> map) {
-   Quiz quiz = quizService.saveQuiz(map); // 3. processing values
+     quizService.saveQuiz(map); // 3. processing values
     return "redirect:/";
   }
 
   // 3. view results
   @GetMapping("/quiz_result") //get quiz result by id
   public String quiz_result(@RequestParam Integer id, Model model) {
+    // getting heavy data from DB
     Quiz quiz = quizService.findByIdEagerPersons(id);
     model.addAttribute(quiz);
     return "quiz_result";
