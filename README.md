@@ -6,7 +6,8 @@ The admin role includes functionality such as creating quizzes, viewing, and ana
 For the user role, it involves taking a quizzes.  
   
 
-![routing](https://github.com/fff4k8/social_research/assets/25677966/84b8f57a-6b38-4653-8244-96590d43aa31)
+![Screenshot_3](https://github.com/fff4k8/social_research/assets/25677966/2dead6e8-cbb8-4a72-b0ed-5815452e67cb)
+
 
 
 
